@@ -1,0 +1,27 @@
+{% extends 'listock/listock_heading.html' %}
+
+<h1>Menu</h1>
+
+<p>Choisissez un listock, ou créer en un nouveau.</p>
+
+{% block content %}
+
+	{% for group in user.groups.all %}
+
+		<div class="selected_group">
+			<h2><a href="{% url 'listock_list' pk=group.listock.pk %}">{{ group.name }}</h2>
+		</div>
+		
+		{% for user in group.users %}
+			<div class="group_members">
+				<p>{{ user.name }}</p>
+			</div>
+		{% endfor %}
+		
+    {% endfor %}
+	
+	{% if user.invitations.all %}
+		<h3><a href="{% url 'listock_invitations' pk=user.pk%}">Vous avez des invitations.</h2>
+	{% endif %}
+	
+{% endblock %}

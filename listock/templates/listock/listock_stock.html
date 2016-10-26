@@ -1,0 +1,31 @@
+{% extends 'listock/listock_heading.html' %}
+
+{% block content %}
+
+	<a class="btn btn-default" href="{% url 'listock_list' pk=listock.pk %}">List</a>
+	
+	<a class="btn btn-default" href="{% url 'listock_items' pk=listock.pk %}">Modify</a>
+	
+	{% for item in listock.items.all %}
+	
+		<div class="article_on_listock">
+		 
+			{% if item.quantityInList != 0  or item.quantityInStock != 0 %}
+				<p>{{ item.object.name }}</p>
+			{% endif %}
+			{% if item.quantityInList != 0 %}
+				<p>{{ item.quantityInList }}</p>
+			{% endif %}
+			{% if item.quantityInList != 0 %}
+				<p>{{ item.quantityInStock }}</p>
+			{% endif %}
+			
+		</div>
+		
+	{% empty %}
+	
+		Empty Listock
+	
+    {% endfor %}
+	
+{% endblock %}

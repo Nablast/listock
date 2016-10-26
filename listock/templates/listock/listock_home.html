@@ -1,0 +1,15 @@
+{% extends 'listock/listock_heading.html' %}
+
+{% block content %}
+
+	<p> <a href="{% url 'userGroup_new' %}"> Create A New Group </a> </p>
+
+	{% for userGroup in userGroup_list %}
+        <div class="userGroup">
+            <h1><a href="{% url 'userGroup_detail' pk=userGroup.pk %}">{{ userGroup.name }}</a></h1>
+            {%for customUser in userGroup.users.all %}
+				<p> {{customUser.user.username}} </p>
+			{% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
